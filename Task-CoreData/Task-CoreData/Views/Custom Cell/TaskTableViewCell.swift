@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Protocol
 protocol TaskCompletionDelegate: AnyObject {
-    func taskCellButtonTapped(_ sender: TaskTableViewCell)
+    func taskCellButtonTapped(_ sender: TaskTableViewCell, isComplteted: Bool, task: Task)
 }
 
 class TaskTableViewCell: UITableViewCell {
@@ -26,19 +26,22 @@ class TaskTableViewCell: UITableViewCell {
         }
     }
     
+    var isCompleted: Bool = false
+    
     weak var delegate: TaskCompletionDelegate?
+    
     
     // MARK: - Actions
     @IBAction func completionButtonTapped(_ sender: Any) {
-        if let delegate = delegate {
-        delegate.taskCellButtonTapped(self)
-        }
+        guard let task = task else { return }
+        isCompleted.toggle()
+        delegate?.taskCellButtonTapped(self, isComplteted: isCompleted, task: task)
     }
     
     func updateView() {
         guard let task = task else { return }
         taskNameLabel.text = task.name
-        let image = task.isComplete ? UIImage(named: "complete") : UIImage(named: "incomplete")
+        let image = task.isCompleted ? UIImage(named: "complete") : UIImage(named: "incomplete")
         completionButton.setImage(image, for: .normal)
         
         guard let date = task.dueDate else { return }

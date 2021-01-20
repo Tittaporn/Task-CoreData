@@ -12,7 +12,11 @@ class TaskController {
     // MARK: - Properties
     static let shared = TaskController()
     
-    var tasks: [Task] = []
+    //var tasks: [Task] = []
+    // S.O.T.
+    var sections: [[Task]] {[notCompletedTasks, completedTasks]}
+    var notCompletedTasks: [Task] = []
+    var completedTasks: [Task] = []
     
     private lazy var fetchRequest: NSFetchRequest<Task> = {
         let request = NSFetchRequest<Task>(entityName: "Task")
@@ -23,13 +27,16 @@ class TaskController {
     // MARK: - CRUD Methods
     // CREATE
     func createTaskWith(name: String, notes: String?, dueDate: Date?) {
-        Task(name: name, notes: notes, dueDate: dueDate)
+        let task = Task(name: name, notes: notes, dueDate: dueDate)
+        notCompletedTasks.append(task)
         CoreDataStack.saveContext()
     }
     
     // READ
     func fetchTasks(){
-        self.tasks = (try? CoreDataStack.context.fetch(fetchRequest)) ?? []
+        let tasks = (try? CoreDataStack.context.fetch(fetchRequest)) ?? []
+        completedTasks = tasks.filter{ $0.isCompleted == true}
+        notCompletedTasks = tasks.filter{ $0.isCompleted == false}
     }
     
     // UPDATE
@@ -41,14 +48,39 @@ class TaskController {
     }
     
     func toggleIsComplete(task: Task ){
-        task.isComplete.toggle()
+        task.isCompleted.toggle()
+        CoreDataStack.saveContext()
+    }
+    
+    func updateTaskCompletionStatus(with task: Task) {
+        if task.isCompleted {
+            if let index = notCompletedTasks.firstIndex(of: task) {
+                notCompletedTasks.remove(at: index)
+                completedTasks.append(task)
+            }
+        } else {
+            if let index = completedTasks.firstIndex(of: task) {
+                completedTasks.remove(at: index)
+                notCompletedTasks.append(task)
+            }
+        }
+        
         CoreDataStack.saveContext()
     }
     
     // DELETE
-    func deleteTask(task: Task) {
-        guard let taskToDelete = tasks.firstIndex(of: task) else { return }
-        tasks.remove(at: taskToDelete)
+    func deleteTask(with task: Task) {
+        if task.isCompleted {
+            if let index = completedTasks.firstIndex(of: task) {
+                completedTasks.remove(at: index)
+            }
+        } else {
+            if let index = notCompletedTasks.firstIndex(of: task) {
+                notCompletedTasks.remove(at: index)
+            }
+        }
+        CoreDataStack.container.viewContext.delete(task)
         CoreDataStack.saveContext()
     }
 }
+
