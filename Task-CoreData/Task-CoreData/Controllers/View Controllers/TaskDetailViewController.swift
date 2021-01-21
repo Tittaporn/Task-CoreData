@@ -22,19 +22,25 @@ class TaskDetailViewController: UIViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround() 
         updateViews()
     }
     
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let name = taskNameTextField.text, !name.isEmpty,
-              let notes = taskNoteTextView.text else { return }
-              let dueDate = taskDueDatePicker.date
-        
-        if let task = task {
-            TaskController.shared.update(task: task, name: name, notes: notes, dueDate: dueDate)
+        guard let name = taskNameTextField.text, !name.isEmpty else { return }
+        var notes = taskNoteTextView.text
+        if notes == "Enter notes here..." {
+            notes = nil
         } else {
-            TaskController.shared.createTaskWith(name: name, notes: notes, dueDate: dueDate)
+            notes = taskNoteTextView.text
+        }
+
+        if let task = task {
+            TaskController.shared.update(task: task, name: name, notes: notes, dueDate: date)
+            print()
+        } else {
+            TaskController.shared.createTaskWith(name: name, notes: notes, dueDate: date)
         }
         navigationController?.popViewController(animated: true)
     }

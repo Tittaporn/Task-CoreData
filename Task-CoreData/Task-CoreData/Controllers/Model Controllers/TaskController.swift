@@ -11,6 +11,7 @@ class TaskController {
     
     // MARK: - Properties
     static let shared = TaskController()
+    let notificationScheduler = NotificationScheduler()
     
     //var tasks: [Task] = []
     // S.O.T.
@@ -30,6 +31,7 @@ class TaskController {
         let task = Task(name: name, notes: notes, dueDate: dueDate)
         notCompletedTasks.append(task)
         CoreDataStack.saveContext()
+        notificationScheduler.scheduleNotification(task: task)
     }
     
     // READ
@@ -45,6 +47,8 @@ class TaskController {
         task.notes = notes
         task.dueDate = dueDate
         CoreDataStack.saveContext()
+        notificationScheduler.cancelNotification(task: task)
+        notificationScheduler.scheduleNotification(task: task)
     }
     
     func toggleIsComplete(task: Task ){
@@ -79,7 +83,8 @@ class TaskController {
                 notCompletedTasks.remove(at: index)
             }
         }
-        CoreDataStack.container.viewContext.delete(task)
+        CoreDataStack.context.delete(task)
+        notificationScheduler.cancelNotification(task: task)
         CoreDataStack.saveContext()
     }
 }

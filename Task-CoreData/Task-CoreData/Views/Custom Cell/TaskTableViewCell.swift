@@ -44,8 +44,7 @@ class TaskTableViewCell: UITableViewCell {
         let image = task.isCompleted ? UIImage(named: "complete") : UIImage(named: "incomplete")
         completionButton.setImage(image, for: .normal)
         
-        guard let date = task.dueDate else { return }
-        dueDateLabel.text = date.dateToString()
+        dueDateLabel.text = task.dueDate?.dateToString() ?? "No due date."
     }
     
 
