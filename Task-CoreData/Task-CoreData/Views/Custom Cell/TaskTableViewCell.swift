@@ -18,6 +18,9 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var completionButton: UIButton!
     @IBOutlet weak var dueDateLabel: UILabel!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var notesTextViewHC: NSLayoutConstraint!
+    @IBOutlet weak var notesTextViegdfsgfdswHC: NSLayoutConstraint!
     
     // MARK: - Properties
     var task: Task? {
@@ -45,6 +48,11 @@ class TaskTableViewCell: UITableViewCell {
         completionButton.setImage(image, for: .normal)
         
         dueDateLabel.text = task.dueDate?.dateToString() ?? "No due date."
+        
+        
+        notesTextView.text = task.notes
+        notesTextView.isEditable = false
+        notesTextViewHC.constant = self.notesTextView.contentSize.height
     }
     
 
