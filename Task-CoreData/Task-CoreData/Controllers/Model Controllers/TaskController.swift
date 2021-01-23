@@ -19,16 +19,48 @@ class TaskController {
     var notCompletedTasks: [Task] = []
     var completedTasks: [Task] = []
     
+//    var taskTagToFeth: String {
+//        
+//        let task: Task
+//        switch task.tag {
+//        case "home":
+//            return "home"
+//        case "work":
+//            return "work"
+//        case "school":
+//            return "school"
+//        case "grocery":
+//            return "grocery"
+//        default:
+//            return "other"
+//        }
+//    }()
+    
+    // [:[]]
+    
+    
+    
     private lazy var fetchRequest: NSFetchRequest<Task> = {
         let request = NSFetchRequest<Task>(entityName: "Task")
         request.predicate = NSPredicate(value: true)
         return request
     }()
     
+    //
+    private lazy var fetchRequestForEachTag: NSFetchRequest<Task> = {
+        let request = NSFetchRequest<Task>(entityName: "Task")
+        
+        //request.predicate = NSPredicate(value: true)
+        request.predicate = NSPredicate(format: "name == %@", "school")
+        return request
+    }()
+    
+    
+    
     // MARK: - CRUD Methods
     // CREATE
-    func createTaskWith(name: String, notes: String?, dueDate: Date?) {
-        let task = Task(name: name, notes: notes, dueDate: dueDate)
+    func createTaskWith(name: String, notes: String?, dueDate: Date?, tag: String?) {
+        let task = Task(name: name, notes: notes, dueDate: dueDate, tag: tag)
         notCompletedTasks.append(task)
         CoreDataStack.saveContext()
         notificationScheduler.scheduleNotification(task: task)
@@ -39,6 +71,10 @@ class TaskController {
         let tasks = (try? CoreDataStack.context.fetch(fetchRequest)) ?? []
         completedTasks = tasks.filter{ $0.isCompleted == true}
         notCompletedTasks = tasks.filter{ $0.isCompleted == false}
+    }
+    
+    func fetchTasksEachTag() {
+        
     }
     
     // UPDATE
@@ -86,6 +122,24 @@ class TaskController {
         CoreDataStack.context.delete(task)
         notificationScheduler.cancelNotification(task: task)
         CoreDataStack.saveContext()
+    }
+    
+    func lookForTaskTag(task: Task) -> String {
+//        if task.tag == "school" {
+//            return "school"
+//        } else if
+        switch task.tag {
+        case "home":
+            return "home"
+        case "work":
+            return "work"
+        case "school":
+            return "school"
+        case "grocery":
+            return "grocery"
+        default:
+            return "other"
+        }
     }
 }
 

@@ -40,7 +40,7 @@ class TaskDetailViewController: UIViewController {
             TaskController.shared.update(task: task, name: name, notes: notes, dueDate: date)
             print()
         } else {
-            TaskController.shared.createTaskWith(name: name, notes: notes, dueDate: date)
+            TaskController.shared.createTaskWith(name: name, notes: notes, dueDate: date, tag: "other")
         }
         navigationController?.popViewController(animated: true)
     }

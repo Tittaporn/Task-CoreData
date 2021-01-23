@@ -15,6 +15,7 @@
 		361593F425B79BEC0083D559 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361593F325B79BEC0083D559 /* TaskTableViewCell.swift */; };
 		361593F825B7C1960083D559 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361593F725B7C1960083D559 /* DateExtension.swift */; };
 		361593FB25B7D6850083D559 /* TaskCompletion+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361593FA25B7D6850083D559 /* TaskCompletion+Convenience.swift */; };
+		3648260625B923AB00FCD84B /* TaskTag+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3648260525B923AB00FCD84B /* TaskTag+Convenience.swift */; };
 		36E3821225B8DE5A003A6B5F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E3821125B8DE5A003A6B5F /* UIViewController+Extension.swift */; };
 		36E3821525B8E07A003A6B5F /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E3821425B8E07A003A6B5F /* NotificationScheduler.swift */; };
 		7EDB767125B6996A00B80B7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDB767025B6996A00B80B7D /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 		361593F325B79BEC0083D559 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		361593F725B7C1960083D559 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		361593FA25B7D6850083D559 /* TaskCompletion+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskCompletion+Convenience.swift"; sourceTree = "<group>"; };
+		3648260525B923AB00FCD84B /* TaskTag+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskTag+Convenience.swift"; sourceTree = "<group>"; };
 		36E3821125B8DE5A003A6B5F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		36E3821425B8E07A003A6B5F /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		7EDB766D25B6996A00B80B7D /* Task-CoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task-CoreData.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +175,7 @@
 				361593E925B7887B0083D559 /* CoreDataStack.swift */,
 				361593EC25B78A430083D559 /* Task+Convenience.swift */,
 				361593FA25B7D6850083D559 /* TaskCompletion+Convenience.swift */,
+				3648260525B923AB00FCD84B /* TaskTag+Convenience.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				361593EA25B7887B0083D559 /* CoreDataStack.swift in Sources */,
 				7EDB767B25B6996A00B80B7D /* Task_CoreData.xcdatamodeld in Sources */,
 				361593F025B78E730083D559 /* TaskController.swift in Sources */,
+				3648260625B923AB00FCD84B /* TaskTag+Convenience.swift in Sources */,
 				361593E725B783610083D559 /* TaskDetailViewController.swift in Sources */,
 				36E3821525B8E07A003A6B5F /* NotificationScheduler.swift in Sources */,
 			);

@@ -20,7 +20,7 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var notesTextViewHC: NSLayoutConstraint!
-    @IBOutlet weak var notesTextViegdfsgfdswHC: NSLayoutConstraint!
+   
     
     // MARK: - Properties
     var task: Task? {
